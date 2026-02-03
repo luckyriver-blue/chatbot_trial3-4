@@ -31,26 +31,9 @@ def get_consulted_system_prompt(depth):
     """
 #チャットボットのグラフのクラス
 class ChatBot:
-    def __init__(self, llm, user_id): #コンストラクタ
-        #user_id%3=1ならAIが浅く相談する
-        if int(user_id) % 3 == 1:
-            depth = "light"
-            system_prompt = get_consulted_system_prompt(depth)
-        #user_id%3 = 2ならAIが深刻に相談する
-        elif int(user_id) % 3 == 2:
-            depth = "serious"
-            system_prompt = get_consulted_system_prompt(depth)
-        else:
-            system_prompt = """
-                あなたはAIチャットボットです。人間関係の悩みについて、相手の相談に乗ってください。
-                お悩みに対して深掘りをして状況を把握してから解決策を提示してください。
-                ユーザーが解決したと判断するまで、話題を切り替えないでください。
-                お悩みが解決したり、話が尽きたりしても、会話を終わらせず、他の「人間関係」の悩み相談に乗ってください。
-                悩みがない場合は、日常の人間関係について質問し、相手が抱える課題や気持ちを自然に引き出してください。
-                丁寧な口調で話し、自然に会話を続けてください。
-                質問は一度に一つまでにしてください。
-                全ての応答は200文字以内で、なるべく短く簡潔にしてください。
-            """
+    def __init__(self, llm): #コンストラクタ
+        depth = "serious"
+        system_prompt = get_consulted_system_prompt(depth)
 
         #プロンプトの設定
         self.prompt = ChatPromptTemplate([
